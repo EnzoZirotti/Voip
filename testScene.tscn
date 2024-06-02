@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmic63mpfajrj"]
+
+[ext_resource type="Script" path="res://Server.gd" id="1_rbl6n"]
+[ext_resource type="Script" path="res://Client.gd" id="2_2lsg2"]
+[ext_resource type="PackedScene" uid="uid://dspq2dnhj1usf" path="res://character.tscn" id="2_a8lx4"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Server" type="Node" parent="."]
+script = ExtResource("1_rbl6n")
+playerScene = ExtResource("2_a8lx4")
+gameSpawnLocation = NodePath("../GameSpawnLocation")
+
+[node name="Host" type="Button" parent="Server"]
+offset_left = 829.0
+offset_top = 48.0
+offset_right = 1015.0
+offset_bottom = 154.0
+text = "Host Server
+"
+
+[node name="Client" type="Node" parent="."]
+script = ExtResource("2_2lsg2")
+playerScene = ExtResource("2_a8lx4")
+gameSpawnLocation = NodePath("../GameSpawnLocation")
+
+[node name="ConnectToServer" type="Button" parent="Client"]
+offset_left = 108.0
+offset_top = 49.0
+offset_right = 300.0
+offset_bottom = 159.0
+text = "Connect to Server
+"
+
+[node name="GameSpawnLocation" type="Node" parent="."]
+
+[connection signal="button_down" from="Server/Host" to="Server" method="_on_host_button_down"]
+[connection signal="button_down" from="Client/ConnectToServer" to="Client" method="_on_connect_to_server_button_down"]
